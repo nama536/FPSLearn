@@ -17,6 +17,7 @@ public class Controller : MonoBehaviour
 {
     //MyCode
     [SerializeField] AudioSource _doorOpenSound;
+    [SerializeField] AudioClip audioClip;
     [SerializeField] Key _keyScript;
     private bool _keyHave;
     [SerializeField] GameObject _door;
@@ -73,8 +74,7 @@ public class Controller : MonoBehaviour
     {
         if (_door && _keyHave == true && _ikkaidake == true)
         {
-            _doorOpenSound.Play();
-            Debug.Log("よし");
+            _doorOpenSound.PlayOneShot(audioClip);
             _ikkaidake = false;
         }
     }
