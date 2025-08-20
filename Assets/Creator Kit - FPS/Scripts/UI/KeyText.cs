@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class KeyText : MonoBehaviour
 {
+    //All MyCode
     [SerializeField] Text _keyText;
     private int _keyJudge;
     private int _clearkeyJudge;
     private bool _keyBool;
     private GameSystem _gameSystem;
+
+    [SerializeField] Text _enemyCountText;
+    private int _enemyCount;
 
     void Start()
     {
@@ -30,6 +34,9 @@ public class KeyText : MonoBehaviour
             Invoke("TextFalse", 4f);
             _keyBool = false;
         }
+
+        _enemyCount = _clearkeyJudge - _keyJudge;
+        _enemyCountText.text = "残り敵数 " + _enemyCount + "体";
     }
 
     void TextFalse()

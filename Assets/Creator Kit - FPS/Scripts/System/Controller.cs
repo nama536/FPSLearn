@@ -15,6 +15,13 @@ public class AmmoInventoryEntry
 
 public class Controller : MonoBehaviour
 {
+    //MyCode
+    [SerializeField] AudioSource _doorOpenSound;
+    [SerializeField] Key _keyScript;
+    private bool _keyHave;
+    [SerializeField] GameObject _door;
+    private bool _ikkaidake = true;
+
     //Urg that's ugly, maybe find a better way
     public static Controller Instance { get; protected set; }
 
@@ -61,6 +68,17 @@ public class Controller : MonoBehaviour
     List<Weapon> m_Weapons = new List<Weapon>();
     Dictionary<int, int> m_AmmoInventory = new Dictionary<int, int>();
 
+    //Mycode
+    void OnTriggerEnter(Collider other)
+    {
+        if (_door && _keyHave == true && _ikkaidake == true)
+        {
+            _doorOpenSound.Play();
+            Debug.Log("よし");
+            _ikkaidake = false;
+        }
+    }
+
     void Awake()
     {
         Instance = this;
@@ -103,6 +121,8 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
+        _keyHave = _keyScript.KeyHave;
+
         if (CanPause && Input.GetButtonDown("Menu"))
         {
             PauseMenu.Instance.Display();
